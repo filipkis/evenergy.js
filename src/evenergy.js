@@ -11,13 +11,13 @@
 		distance = undefined,
 		acceleration = 0, // acceleration
 		slope = 0, // slope
-		mass = 0, // vehicle mass
-		cr = 0, // vehicle roll resistance coefficient
-		cd = 0, // vehicle drag coefficient
-		area = 0, // vehicle area
+		mass = 1521, // vehicle mass
+		cr = 0.012, // vehicle roll resistance coefficient
+		cd = 0.29, // vehicle drag coefficient
+		area = 2.7435, // vehicle area
 		r = 1.225, // air density
 		g = 9.82, // gravity
-		efficiency = 0.8; // efficiency
+		efficiency = 0.87; // efficiency
 
 	function Evenergy(){	
 	
@@ -63,8 +63,6 @@
     	fd = 0.5 * r * cd * area * speed * speed; // kg m/s^2
 
     	total = fa + fs + fr + fd;
-    	
-    	console.log("Total force: " + total);
 
     	return total;  // kg m/s^2
 
@@ -171,12 +169,31 @@
 			return efficiency;
 		},
 		power: function() {
-			power = totalForce(evenergy.speed()) * evenergy.speed() / 1000 * efficiency; // kW
-			console.log("Power: " + power);
+			power = totalForce(evenergy.speed()) * evenergy.speed() / 1000 / efficiency; // kW
 			return power;
 		},
 		energy: function() {
 			return evenergy.power() * evenergy.time() / 3600; 
+		},
+		kmPerKWh: function() {
+			return evenergy.distance()/ 1000 / evenergy.energy();
+		},
+		kWhPerKm: function() {
+			return evenergy.energy() / evenergy.distance() * 1000;
+		}, 
+		reset: function() {
+			speed = undefined;
+			time = undefined;
+			distance = undefined;
+		},
+		stat: function(){
+			console.log("Speed: " + (evenergy.speed() * 3600/1000) + " km/h");
+			console.log("Distance: " + (evenergy.distance() / 1000) + " km");
+			console.log("Duration: " + (evenergy.time() / 60) + " min");
+			console.log("Efficiency: " + evenergy.efficiency());
+			console.log("Energy: " + evenergy.energy() + " kWh");
+			console.log("km/kWh: " + evenergy.kmPerKWh());
+			console.log("kWh/km: " + evenergy.kWhPerKm());
 		}
 
 	});
