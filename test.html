@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="src/evenergy.js"></script>
+</head>
+<body>
+	<h1>Electric Vehicle Energy Calculator</h1>
+	<h2>Vehicle properties</h2>
+	<div>
+		<label for="cd">Drag coefficient (Cd)</label>
+		<input id="cd" placeholder="Drag coefficient" value="0.29"/>
+	</div>
+	<div>
+		<label for="cr">Roll coefficient (Cr)</label>
+		<input id="cr" placeholder="Roll coefficient" value="0.012"/>
+	</div>
+	<div>
+		<label for="area">Area (A in m^2)</label>
+		<input id="area" placeholder="Area" value="2.7435"/>
+	</div>
+	<div>
+		<label for="mass">Mass (m in kg)</label>
+		<input id="mass" placeholder="Mass" value="1521"/>
+	</div>
+	<h2>Usage data</h2>
+	<div>
+		<label for="speed">Speed (v in km/h)</label>
+		<input id="speed" placeholder="Speed" value="110"/>
+	</div>
+	<div>
+		<label for="distance">Distance (d in km)</label>
+		<input id="distance" placeholder="Distance" value="24"/>
+	</div>
+	<h2>Results</h2>
+	<div>
+		Energy needed: <span id="energy"></span> kWh
+	</div>
+
+	<div>
+		<button onclick="calculate()">Calculate</button>
+	</div>
+	<script type="text/javascript">
+
+	function calculate() {
+		cd = document.getElementById("cd").value
+		cr = document.getElementById("cr").value
+		area = document.getElementById("area").value
+		mass = document.getElementById("mass").value
+		speed = document.getElementById("speed").value
+		distance = document.getElementById("distance").value
+
+		en = evenergy.config({cd:cd,cr:cr,area:area,mass:mass}).speed(speed,"kmh").distance(distance,"km").energy().toFixed(2);
+
+		console.log("T " + en)
+
+		document.getElementById("energy").innerHTML = en;
+	}
+
+	calculate();
+
+	</script>
+</body>
+</html>
