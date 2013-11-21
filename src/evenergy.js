@@ -1,3 +1,7 @@
+//! evenergy.js
+//! version: 0.1.0
+//! authors: Filip Kis, Anders Lundström
+//! license: MIT 
 
 (function (window,undefined) {
 
