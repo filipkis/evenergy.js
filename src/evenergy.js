@@ -201,6 +201,7 @@
 			console.log("Duration: " + (evenergy.time() / 60) + " min");
 			console.log("Efficiency: " + evenergy.efficiency());
 			console.log("Energy: " + evenergy.energy() + " kWh");
+			console.log("Estimated distance: " + evenergy.estimatedDistance() + " m");
 			console.log("km/kWh: " + evenergy.kmPerKWh());
 			console.log("kWh/km: " + evenergy.kWhPerKm());
 		},

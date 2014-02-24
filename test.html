@@ -33,9 +33,16 @@
 		<label for="distance">Distance (d in km)</label>
 		<input id="distance" placeholder="Distance" value="24"/>
 	</div>
+	<div>
+		<label for="distance">State of charge (soc in KWH)</label>
+		<input id="soc" placeholder="State of charge" value="21"/>
+	</div>
 	<h2>Results</h2>
 	<div>
 		Energy needed: <span id="energy"></span> kWh
+	</div>
+	<div>
+		Estimated distance (based on state of charge): <span id="estimatedDistance"></span> m
 	</div>
 
 	<div>
@@ -50,12 +57,16 @@
 		mass = document.getElementById("mass").value
 		speed = document.getElementById("speed").value
 		distance = document.getElementById("distance").value
+		soc = document.getElementById("soc").value
+
 
 		en = evenergy.config({cd:cd,cr:cr,area:area,mass:mass}).speed(speed,"kmh").distance(distance,"km").energy().toFixed(2);
+		ed = evenergy.soc(soc).estimatedDistance();
 
 		console.log(evenergy.stat())
 
 		document.getElementById("energy").innerHTML = en;
+		document.getElementById("estimatedDistance").innerHTML = ed;
 	}
 
 	calculate();
