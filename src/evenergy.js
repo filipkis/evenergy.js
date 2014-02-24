@@ -9,6 +9,7 @@
 		speed = undefined, 
 		time = undefined, 
 		distance = undefined,
+		soc = undefined,
 		acceleration = 0, // acceleration
 		slope = 0, // slope
 		mass = 1521, // vehicle mass
@@ -89,6 +90,13 @@
 				else
 					return distance / time;
 			return speed;
+		},
+		soc: function(value) {
+			if (value !== undefined) {
+				soc = value;
+				return evenergy;
+			}
+			return soc;
 		},
 		distance: function(value,unit) {
 			if(value !== undefined) {
@@ -185,6 +193,7 @@
 			speed = undefined;
 			time = undefined;
 			distance = undefined;
+			soc = undefined;
 		},
 		stat: function(){
 			console.log("Speed: " + (evenergy.speed() * 3600/1000) + " km/h");
@@ -194,6 +203,9 @@
 			console.log("Energy: " + evenergy.energy() + " kWh");
 			console.log("km/kWh: " + evenergy.kmPerKWh());
 			console.log("kWh/km: " + evenergy.kWhPerKm());
+		},
+		estimatedDistance: function() {
+			return evenergy.speed() * ((evenergy.soc() * 3600)/ evenergy.power()) ;
 		}
 
 	});
